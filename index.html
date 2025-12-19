@@ -298,17 +298,32 @@
     text-shadow 1400ms ease-in-out;
 }
 
-/* Hover — gentle bloom */
-.copy:hover .quote {
-  text-shadow: 0 0 22px rgba(48,199,229,0.35);
-  transition-delay: 200ms;
-}
-
 
     /* Safe area on phones */
     @supports (padding: env(safe-area-inset-bottom)) {
       .copy { bottom: calc(9vh + env(safe-area-inset-bottom)); }
     }
+    /* AUTO GLOW (always on, faster pulse) */
+.quote{
+  animation: quoteGlow 12.0s ease-in-out infinite;
+  will-change: text-shadow;
+}
+
+@keyframes quoteGlow{
+  0%, 100%{
+    text-shadow:
+      0 2px 6px rgba(0,0,0,0.65),
+      0 8px 22px rgba(0,0,0,0.45),
+      0 0 10px rgba(48,199,229,0.15);
+  }
+  50%{
+    text-shadow:
+      0 2px 8px rgba(0,0,0,0.70),
+      0 10px 26px rgba(0,0,0,0.50),
+      0 0 26px rgba(48,199,229,0.55);
+  }
+}
+
     #quote .line{
   display:block !important;
   white-space:nowrap;
@@ -350,6 +365,8 @@
     const copy = document.getElementById('copy');
     const rays = document.getElementById('rays'); // may be null
     const tVal = document.getElementById('tVal');
+    
+    let revealed = false; // ✅ latch flag
 
     function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
 
@@ -366,16 +383,22 @@
       // Ease curve
       const ease = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
 
-      // Photo emerges
-      const p = clamp((ease - 0.18) / 0.62, 0, 1);
-      photoWrap.style.opacity = p.toFixed(3);
-      photoWrap.style.transform =
-        `translate3d(0, ${18*(1-p)}px, 0) scale(${0.985 + 0.015*p})`;
 
-      // Copy comes in
-      const c = clamp((ease - 0.28) / 0.55, 0, 1);
-      copy.style.opacity = c.toFixed(3);
-      copy.style.transform = `translate3d(0, ${10*(1-c)}px, 0)`;
+// Photo emerges + Copy comes in
+let p = clamp((ease - 0.18) / 0.62, 0, 1);
+let c = clamp((ease - 0.28) / 0.55, 0, 1);
+
+// 🔒 LATCH: once revealed, never fade out
+if (!revealed && p >= 0.4) revealed = true;
+if (revealed) { p = 1; c = 1; }
+
+// Apply styles (now uses latched p/c if triggered)
+photoWrap.style.opacity = p.toFixed(3);
+photoWrap.style.transform =
+  `translate3d(0, ${18*(1-p)}px, 0) scale(${0.985 + 0.015*p})`;
+
+copy.style.opacity = c.toFixed(3);
+copy.style.transform = `translate3d(0, ${10*(1-c)}px, 0)`;
 
 // Line-by-line reveal (slow, but never ends washed out)
 const lines = document.querySelectorAll('#quote .line');
@@ -407,4 +430,3 @@ lines.forEach((el, i) => {
 
 </body>
 </html>
-
