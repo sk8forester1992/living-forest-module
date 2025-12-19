@@ -164,9 +164,9 @@
     /* Quote treatment */
     .copy {
       position:absolute;
-      left: 5vw;
-      bottom: 9vh;
-      max-width: min(640px, 86vw);
+      left: 7vw;
+      bottom: 13vh;
+      max-width: min(1200px, 92vw);
       color: var(--text);
       text-shadow: 0 2px 20px var(--shadow);
       z-index:5;
@@ -183,7 +183,9 @@
         color: #30C7E5; /* style guide accent */
         margin-bottom: 14px;
     }
-
+  .quote .line {
+    display: block;
+  }
     .quote {
   font-family: "Avenir Next", system-ui, sans-serif;
   font-weight: 700;
@@ -205,6 +207,7 @@
 .quote{
   -webkit-text-stroke: 0.6px rgba(0,0,0,0.25);
 }
+
 
 .quote{
   position: relative;
@@ -306,6 +309,10 @@
     @supports (padding: env(safe-area-inset-bottom)) {
       .copy { bottom: calc(9vh + env(safe-area-inset-bottom)); }
     }
+    #quote .line{
+  display:block !important;
+  white-space:nowrap;
+}
   </style>
 </head>
 <body>
@@ -330,10 +337,11 @@ font:12px system-ui;letter-spacing:.02em;">
       <div class="copy" id="copy">
         <div class="kicker">A living memory</div>
         <p class="quote" id="quote">
-  <span class="line">“In recognition of outstanding service</span><br>
-  <span class="line">in the conservation of American resources</span><br>
-  <span class="line">of forests, soil, water, wildlife, & recreation.”</span>
+  <span class="line">“In recognition of outstanding service</span>
+<span class="line">in the conservation of American resources</span>
+<span class="line">of forests, soil, water, wildlife, &amp; recreation.”</span>
 </p>
+
 
         <div class="attrib">— Walt Disney, 1966</div>
       </div>
