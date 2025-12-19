@@ -22,7 +22,7 @@
     .module {
       position: relative;
       width: 100%;
-      height: 260vh; /* controls how long the reveal takes */
+      height: 200vh; /* controls how long the reveal takes */
       background: #000;
     }
 
@@ -385,11 +385,12 @@
 
 
 // Photo emerges + Copy comes in
-let p = clamp((ease - 0.18) / 0.62, 0, 1);
-let c = clamp((ease - 0.28) / 0.55, 0, 1);
+let p = clamp((ease - 0.38) / 0.62, 0, 1); // Walt: slow start, still finishes
+let c = clamp((ease - 0.50) / 0.55, 0, 1); // Text: later, still finishes
+
 
 // 🔒 LATCH: once revealed, never fade out
-if (!revealed && p >= 0.4) revealed = true;
+if (!revealed && p >= 0.85) revealed = true;
 if (revealed) { p = 1; c = 1; }
 
 // Apply styles (now uses latched p/c if triggered)
