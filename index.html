@@ -183,13 +183,26 @@
         color: #30C7E5; /* style guide accent */
         margin-bottom: 14px;
     }
+  .headline{
+  font-family: "Avenir Next", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.18;
+  color: rgba(255,255,255,0.94);
+  text-shadow:
+    0 2px 10px rgba(0,0,0,0.55),
+    0 10px 26px rgba(0,0,0,0.35);
+  margin: 0 0 14px 0;
+  max-width: 46ch; /* keeps it “title-like” and prevents a super-wide line */
+}
+
   .quote .line {
     display: block;
   }
     .quote {
   font-family: "Avenir Next", system-ui, sans-serif;
   font-weight: 700;
-  font-size: clamp(30px, 3.2vw, 48px);
+  font-size: clamp(28px, 3.0vw, 44px);
   line-height: 1.15;
   color: #D6F5D6;
 
@@ -346,6 +359,9 @@
 
       <div class="copy" id="copy">
         <div class="kicker">A living memory</div>
+          <div class="headline">
+    AFA/American Forests Honors Walt Disney with the Association's Distinguished Service Award in 1966
+  </div>
         <p class="quote" id="quote">
   <span class="line">“In recognition of outstanding service</span>
 <span class="line">in the conservation of American resources</span>
