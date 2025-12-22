@@ -123,6 +123,7 @@
     rgba(0,0,0,0.45) 82%,
     transparent 96%
   );
+  
 }
 .photo::after{
   content:"";
@@ -165,7 +166,7 @@
     .copy {
       position:absolute;
       left: 7vw;
-      bottom: 13vh;
+      bottom: 15vh;
       max-width: min(1200px, 92vw);
       color: var(--text);
       text-shadow: 0 2px 20px var(--shadow);
@@ -176,13 +177,44 @@
     }
     .kicker {
         font-family: "Avenir Next", system-ui, sans-serif;
-        font-weight: 600; /* Demi Bold */
-        letter-spacing: 0.18em;
+        font-weight: 700; /* Demi Bold */
+        letter-spacing: 0.22em;
         text-transform: uppercase;
-        font-size: 14px;
+        font-size: 18px;
         color: #30C7E5; /* style guide accent */
-        margin-bottom: 14px;
+        margin-bottom: 0px;
     }
+  .kicker{
+  position: relative;
+  padding: 4px 8px;
+  margin-left: -8px; /* optically aligns with headline */
+}
+
+.kicker-wrap{
+  position: relative;
+  display: inline-block; /* shrink to text width */
+}
+
+.kicker-wrap::before{
+  content: "";
+  position: absolute;
+  inset: -10px -16px;
+  border-radius: 14px;
+
+  background: radial-gradient(
+    ellipse at left center,
+    rgba(0,0,0,0.65),
+    rgba(0,0,0,0.38) 45%,
+    rgba(0,0,0,0.12) 65%,
+    transparent 80%
+  );
+
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
   .headline{
   font-family: "Avenir Next", system-ui, sans-serif;
   font-weight: 700;
@@ -216,6 +248,7 @@
 }
 .quote {
   position: relative; /* required for the mask */
+  margin-bottom: 8px;
 }
 .quote{
   -webkit-text-stroke: 0.6px rgba(0,0,0,0.25);
@@ -276,6 +309,31 @@
       font-size: 16px;
       color: rgba(214,245,214,0.85);
     }
+.context{
+  margin-top: 18px;
+  max-width: 980px;
+
+  font-family: "Avenir Next", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.45;
+  position: relative;
+
+  color: rgba(255,255,255,0.85);
+
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.65),
+    0 4px 12px rgba(0,0,0,0.45);
+}
+.context::before{
+  content:"";
+  position:absolute;
+  inset: -6px -10px;
+  background: rgba(0,0,0,0.38);
+  filter: blur(8px);
+  z-index: -1;
+  border-radius: 10px;
+}
 
     /* “Light rays” */
     .rays {
@@ -288,21 +346,7 @@
       pointer-events:none;
       will-change: opacity;
     }
-    .copy::before {
-  content: "";
-  position: absolute;
-  inset: -20px -26px;
-  background:
-    radial-gradient(
-      ellipse at left center,
-      rgba(0,0,0,0.55),
-      rgba(0,0,0,0.25) 50%,
-      rgba(0,0,0,0.10) 65%,
-      transparent 78%
-    );
-  z-index: -1;
-  border-radius: 26px;
-}
+
 
 /* Base state — no glow, but ready */
 .quote {
@@ -357,19 +401,25 @@
         <div class="grain"></div>
       </div>
 
-      <div class="copy" id="copy">
-        <div class="kicker">A living memory</div>
-          <div class="headline">
-    AFA/American Forests Honors Walt Disney with the Association's Distinguished Service Award in 1966
+     <div class="copy" id="copy">
+
+  <!-- Kicker -->
+  <div class="kicker-wrap">
+    <div class="kicker">A LIVING LEGACY</div>
   </div>
-        <p class="quote" id="quote">
-  <span class="line">“In recognition of outstanding service</span>
-<span class="line">in the conservation of American resources</span>
-<span class="line">of forests, soil, water, wildlife, &amp; recreation.”</span>
-</p>
 
+  <!-- Quote -->
+  <p class="quote" id="quote">
+    <span class="line">“In recognition of outstanding service</span>
+    <span class="line">in the conservation of American resources</span>
+    <span class="line">of forests, soil, water, wildlife, &amp; recreation.”</span>
+  </p>
 
-        <div class="attrib">— Walt Disney, 1966</div>
+  <!-- Narrative line (moved BELOW quote) -->
+  <div class="context">
+    AFA/American Forests Honors Walt Disney with the Association’s
+    Distinguished Service Award in 1966
+  </div>
       </div>
     </div>
   </section>
