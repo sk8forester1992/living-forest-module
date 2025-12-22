@@ -329,11 +329,15 @@
 .context::before{
   content:"";
   position:absolute;
-  inset: -6px -10px;
+  inset: -6px -4px -6px -12px;
   background: rgba(0,0,0,0.38);
   filter: blur(8px);
   z-index: -1;
   border-radius: 10px;
+}
+.context-wrap{
+  position: relative;
+  display: inline-block; /* 🔑 shrink to text width */
 }
 
     /* “Light rays” */
@@ -417,6 +421,7 @@
   </p>
 
   <!-- Narrative line (moved BELOW quote) -->
+  <div class=""context-wrap">
   <div class="context">
     AFA/American Forests Honors Walt Disney with the Association’s
     Distinguished Service Award in 1966
